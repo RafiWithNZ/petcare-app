@@ -54,7 +54,7 @@ export const register = async (req, res) => {
 
     //send email
     const activationToken = createActivationToken(user);
-    const activationUrl = `http://localhost:3000/activation/${activationToken}`;
+    const activationUrl = `https://griyapets.vercel.app/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -204,7 +204,7 @@ export const forgotPassword = async (req, res) => {
 
     //send email
     const resetToken = createResetToken(user);
-    const resetUrl = `http://localhost:3000/forget/${resetToken}`;
+    const resetUrl = `https://griyapets.vercel.app/forget/${resetToken}`;
     try {
       await sendMail({
         email: user.email,
