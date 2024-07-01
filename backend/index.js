@@ -20,6 +20,12 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
+const corsOptions = {
+  origin: "https://griyapets-api.vercel.app/",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
 app.get("/", (req, res) => {
   res.send("API is working");
 });
