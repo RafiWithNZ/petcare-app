@@ -21,7 +21,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-  origin: ["https://griyapets-api.vercel.app"],
+  origin: ["https://griyapets.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
