@@ -22,15 +22,18 @@ const port = process.env.PORT || 8000;
 
 const corsOptions = {
   origin: "https://griyapets.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 };
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("API is working");
 });
 
-// Database connection
 mongoose.set("strictQuery", false);
 
 const connectDB = async () => {
@@ -39,15 +42,11 @@ const connectDB = async () => {
     console.log("MongoDB connected");
   } catch (error) {
     console.log("MongoDB connection failed", error.message);
-    // Retry if connection fails
     setTimeout(connectDB, 5000);
   }
 };
 
-// Middleware
-app.use(express.json());
-app.use(cookieParser());
-app.use(cors(corsOptions));
+// Routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/caretakers", caretakerRoute);
