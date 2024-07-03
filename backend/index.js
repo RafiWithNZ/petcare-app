@@ -22,14 +22,13 @@ const port = process.env.PORT || 8000;
 
 const corsOptions = {
   origin: 'https://griyapets.vercel.app',
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-
-app.options('*', cors(corsOptions)); // Enable pre-flight requests for all routes
 
 app.get("/", (req, res) => {
   res.send("API is working");
