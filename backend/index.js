@@ -20,14 +20,14 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 
-const corsOptions = {
-  origin: "*",
+const corsConfig = {
+  origin: "https://griyapets.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 };
 
 // Middlewares
-app.use(cors(corsOptions));
+app.use(cors(corsConfig));
 app.use(express.json());
 app.use(cookieParser());
 
