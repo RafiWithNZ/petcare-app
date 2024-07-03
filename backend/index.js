@@ -1,4 +1,5 @@
 import express from "express";
+import http from "http";
 import cors from "cors";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
@@ -21,11 +22,22 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 const corsOptions = {
-  origin: 'https://griyapets.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  origin: "*",
   credentials: true,
-  optionsSuccessStatus: 204
 };
+http.createServer((req, res) => {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', 'https://griyapets.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  if (req.method === 'OPTIONS') {
+    // Preflight request
+    res.writeHead(204);
+    res.end();
+    return;
+  }
+});
 
 app.use(cors(corsOptions));
 app.use(express.json());
